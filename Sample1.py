@@ -32,26 +32,34 @@ data_stat = pd.read_sql(''' SELECT zpid, TypeofProperty, Price, beds, addressStr
                                      WHERE addressStreet LIKE '%Kingsway%'
                                      ORDER BY Price DESC ''', db_conn)
 
-data_stat = pd.read_sql(''' SELECT zpid, TypeofProperty, Price, beds, addressStreet, area
-                                     FROM VancouverPropertiesTable
-                                     WHERE addressStreet LIKE '%Kingsway%'
-                                     ORDER BY Price DESC ''', db_conn)
-print(data_stat)
 
-engineering_tot = pd.read_sql(''' SELECT SUM(n_enrolled) AS total_engineering_enrollment, COUNT(title) AS total_courses, AVG(price) AS avg_course_purchase, MIN(price) AS min_course_purchase, MAX(price) AS max_course_purchase
-                               FROM edx_course_descriptions
-                               WHERE subject == 'Engineering'
-                               ORDER BY price DESC ''', edx_conn)
 
 data_stat_Avg = pd.read_sql(''' SELECT AVG(Price)AS Avg_price_condo , TypeofProperty, AVG(area) AS Avg_area
                                      FROM VancouverPropertiesTable
                                      WHERE TypeofProperty == 'Condo'  ''', db_conn)
 """
-reviews_lec = pd.read_sql(''' SELECT course_title, subject, num_lectures, num_reviews
-                             FROM udemy_updated
-                             ORDER BY num_reviews DESC''', udemy_conn)
-reviews_lec
-sns.barplot(x = 'num_reviews', y = 'course_title', data = by_reviews, color = 'red', edgecolor = 'black', ci=False)
 
+data_set = pd.read_sql(''' SELECT zpid, TypeofProperty, Price, beds, addressStreet, area
+                                     FROM VancouverPropertiesTable
+                                     WHERE addressStreet LIKE '%Kingsway%'
+                                     ORDER BY Price DESC ''', db_conn)
+#print(data_stat)
+#sns.barplot(x = 'area', y = 'Price', data = data_set, color = 'red', edgecolor = 'black', errorbar=('ci', False))
+"""
+properties.plot.scatter(x="Price",y="area", title='Relationships between Price and Area', c="beds", cmap='summer')
+plt.colorbar(label="Number of Beds")
+current_values = plt.gca().get_xticks()
+plt.gca().set_xticklabels(['{:,.0f}'.format(x) for x in current_values])
+"""
 
-print(data_stat_Avg)
+plt.rcParams.update( {'figure.figsize':(10,8), 'figure.dpi':100})
+plt.scatter(x=properties.Price, y=properties.area, c=properties.beds, cmap='Spectral')
+plt.colorbar(label="Number of Beds")
+plt.title('Relationships between Price and Area')
+plt.xlabel('Price (CA$)')
+plt.ylabel('Property Area (Square feet)')
+current_values = plt.gca().get_xticks()
+plt.gca().set_xticklabels(['{:,.0f}'.format(x) for x in current_values])
+plt.show()
+
+#print(data_stat_Avg)
