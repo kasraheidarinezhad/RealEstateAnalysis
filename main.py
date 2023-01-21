@@ -5,11 +5,6 @@ import pandas as pd
 import warnings
 warnings.filterwarnings('ignore')
 
-city = 'Vancouver,-BC_rb/' #*****change this city to what you want!!!!*****
-
-
-#feel free to make this prettier
-
 #add headers in case you use chromedriver (captchas are no fun); namely used for chromedriver
 req_headers = {
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -30,7 +25,6 @@ with requests.Session() as s:
        data = json.loads(re.search(r'!--(\{"queryState".*?)-->', resp.text).group(1))
        data_list.append(data)
 
-
 df = pd.DataFrame()
 
 def make_frame(frame):
@@ -41,17 +35,12 @@ def make_frame(frame):
 
 df = make_frame(df)
     
-#drop cols
-df = df.drop('hdpData', 1) 
-
-#drop dupes
-df = df.drop_duplicates(subset='zpid', keep="last")
+df = df.drop('hdpData', 1) #drop cols
+df = df.drop_duplicates(subset='zpid', keep="last") #drop dupes
 
 #filters
 df['zestimate'] = df['zestimate'].fillna(0)
 df['best_deal'] = df['unformattedPrice'] - df['zestimate']
 df = df.sort_values(by='best_deal',ascending=True)
 
-#print('shape:', df.shape)
-#print(df[['id','address','beds','baths','area','price','zestimate','best_deal']].head(90))
-df.to_csv('zillow3.csv', encoding='utf-8')
+df.to_csv('zillow_original.csv', encoding='utf-8')
