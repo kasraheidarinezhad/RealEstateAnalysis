@@ -18,7 +18,6 @@ import mplfinance as fplt
 
 
 df1 = pd.read_csv('zillow.csv')
-
 df = df1[['Price', 'TypeofProperty' ]]
 df['binned_price'] = pd.cut(df.Price, [1, 1000000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000, 10000000])
 #df.groupby('binned_price')['TypeofProperty'].value_counts().plot(kind='bar', stacked=True, ylabel='Frequency', xlabel='Price binned',title='Price group frequency by Type', rot=90, fontsize=9)

@@ -1,3 +1,4 @@
 {
-    "python.defaultInterpreterPath": "C:\\Users\\admin\\anaconda3\\python.exe"
+    "python.defaultInterpreterPath": "C:\\Users\\admin\\anaconda3\\python.exe",
+    "debug.javascript.unmapMissingSources": true
 }

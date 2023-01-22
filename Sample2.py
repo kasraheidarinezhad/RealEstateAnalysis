@@ -15,9 +15,9 @@ fig, (ax1, ax2, ax3) = plt.subplots(1,3)
 #df[df['TypeofProperty'] == 'Multi-family home for sale'].plot(x='beds', y='Price', ax=ax, label='Multi-family home')
 #ax.set_title("Property Sale by Type")
 #plt.show()
-sub_df1 = df[df['TypeofProperty'] == 'Condo for sale']
-sub_df2 = df[df['TypeofProperty'] == 'House for sale']
-sub_df3 = df[df['TypeofProperty'] == 'Multi-family home for sale']
+sub_df1 = df[df['TypeofProperty'] == 'Condo']
+sub_df2 = df[df['TypeofProperty'] == 'House']
+sub_df3 = df[df['TypeofProperty'] == 'Multi-family']
 ax1 = plt.hist(sub_df1['Price'], bins=20, label=['Price', 'Beds'])
 ax2 = plt.hist(sub_df2['Price'], bins=20, label=['Price', 'Beds'])
 ax3 = plt.hist(sub_df3['Price'], bins=20, label=['Price', 'Beds'])
