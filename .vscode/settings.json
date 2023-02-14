@@ -1,4 +1,10 @@
 {
-    "python.defaultInterpreterPath": "C:\\Users\\admin\\anaconda3\\python.exe",
-    "debug.javascript.unmapMissingSources": true
+    "python.defaultInterpreterPath": "C:\\anaconda3\\python.exe",
+    "debug.javascript.unmapMissingSources": true,
+    "notebook.output.textLineLimit": 500,
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
